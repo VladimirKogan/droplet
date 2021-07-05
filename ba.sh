@@ -1,3 +1,7 @@
+sudo mv twitter.py ../
+sudo mv tg.py ../
+sudo mv bot.py ../
+sudo cd ..
 sudo apt-get update
 sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
 sudo apt-get install default-jdk
