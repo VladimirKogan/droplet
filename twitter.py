@@ -6,6 +6,7 @@ from tg import send_message_to_bot
 from datetime import datetime
 
 base_url=sys.argv[1]
+part = int(sys.argv[2])
 
 FIRST_TWEET_XML = "(//div[@lang='en'])[1]/span"
 SECOND_TWEET_XML = "(//div[@lang='en'])[2]/span"
@@ -32,6 +33,26 @@ def if_has_pinned_tweet(driver):
         return 1
 
 
+def check_minute(minute):
+    m = int(minute)
+    first = [0, 1, 2, 3, 4]
+    second = [5, 6, 7, 8, 9]
+    third = [10, 11, 12, 13, 14]
+
+    if m % 15 in first: return 1
+    if m % 15 in second: return 2
+    if m % 15 in third: return 3
+    return 0
+
+
+def check_time():
+    while True:
+        minutes = datetime.now().strftime("%M")
+        if check_minute(minutes) == part:
+            break
+        print("sleep")
+        time.sleep(1)
+
 
 def if_tweet_retweet(driver, num):
     try:
@@ -44,6 +65,7 @@ def driverStart(name):
     counter = 1
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
+    options.add_argument('--incognito')
     options.add_argument('--disable-infobars')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
@@ -52,6 +74,7 @@ def driverStart(name):
     driver.get(base_url)
     LAST_TWEET = ''
     while True:
+        check_time()
         while True:
             try:
                 last_tweet = getTweetByNum(driver, 1)
