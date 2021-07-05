@@ -1,6 +1,4 @@
 git clone https://github.com/VladimirKogan/droplet.git
-echo 'yang236nrn@gmail.com'
-echo 'g1Th_U8_@'
 cd droplet
 sudo mv twitter.py ../
 sudo mv tg.py ../
