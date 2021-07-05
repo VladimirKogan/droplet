@@ -1,3 +1,7 @@
+git clone https://github.com/VladimirKogan/droplet.git
+echo 'yang236nrn@gmail.com'
+echo 'g1Th_U8_@'
+cd droplet
 sudo mv twitter.py ../
 sudo mv tg.py ../
 sudo mv bot.py ../
@@ -17,4 +21,3 @@ sudo chmod +x /usr/bin/chromedriver
 sudo apt install python3-pip
 pip3 install selenium
 pip3 install telebot
-python3 python3 twitter.py "https://twitter.com/elonmusk"
