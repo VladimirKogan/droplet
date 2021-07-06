@@ -47,6 +47,7 @@ def check_minute(minute):
 
 def check_time():
     while True:
+        break
         minutes = datetime.now().strftime("%M")
         if check_minute(minutes) == part:
             break
@@ -70,7 +71,7 @@ def driverStart(name):
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
     options.add_argument('--remote-debugging-port=9222')
-    driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
+    driver = webdriver.Chrome(options=options, executable_path='drivers/driver241/chromedriver')
     driver.get(base_url)
     LAST_TWEET = ''
     while True:
