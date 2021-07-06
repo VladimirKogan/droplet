@@ -1,3 +1,7 @@
+git clone https://github.com/VladimirKogan/droplet.git
+sudo mv droplet/twitter.py .
+sudo mv droplet/tg.py .
+sudo mv droplet/bot.py .
 sudo apt-get update
 sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
 sudo apt-get install -y default-jdk
@@ -58,3 +62,4 @@ sudo rm chromedriver_linux64.zip
 sudo apt install -y python3-pip
 pip3 install selenium
 pip3 install telebot
+python3 twitter.py 'elonmusk' 3
