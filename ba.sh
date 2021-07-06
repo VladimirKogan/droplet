@@ -1,9 +1,7 @@
 git clone https://github.com/VladimirKogan/droplet.git
-cd droplet
-sudo mv twitter.py ../
-sudo mv tg.py ../
-sudo mv bot.py ../
-sudo cd ..
+sudo mv droplet/twitter.py .
+sudo mv droplet/tg.py .
+sudo mv droplet/bot.py .
 sudo apt-get update
 sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
 sudo apt-get install default-jdk
