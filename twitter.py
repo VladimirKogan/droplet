@@ -61,9 +61,9 @@ def if_tweet_retweet(driver, num):
         return 1
     except:
         return 0
-
 def driverStart(name):
-    counter = 1
+    url = "https://twitter.com/"+name
+    send_message_to_bot(f"Start Parser for {name}")
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('--incognito')
@@ -72,31 +72,42 @@ def driverStart(name):
     options.add_argument('--no-sandbox')
     options.add_argument('--remote-debugging-port=9222')
     driver = webdriver.Chrome(options=options, executable_path='drivers/driver241/chromedriver')
-    driver.get(base_url)
-    LAST_TWEET = ''
-    while True:
-        check_time()
+    try:
+        counter = 1
+        driver.get(url)
+        LAST_TWEET = ''
         while True:
-            try:
-                last_tweet = getTweetByNum(driver, 1)
-                break
-            except:
-                time.sleep(0.01)
-        current_time = datetime.now().strftime("%H:%M:%S")
-        first_tweet_num = if_has_pinned_tweet(driver)
-        last_tweet = getTweetByNum(driver, first_tweet_num)
-        print(f"Current Time ({counter})=, {str(current_time)}: {last_tweet}")
-        counter += 1
-        if LAST_TWEET == '':
-            LAST_TWEET = last_tweet
-        elif LAST_TWEET != last_tweet and last_tweet != 'retweeted':
-            now = datetime.now()
-            current_time = now.strftime("%H:%M:%S")
-            print("Current Time =", current_time)
-            main_func(last_tweet)
-            send_message_to_bot("TWITTERPARSE: " + last_tweet)
-            new_tweet = last_tweet
-            LAST_TWEET = new_tweet
+            check_time()
+            while True:
+                try:
+                    last_tweet = getTweetByNum(driver, 1)
+                    break
+                except:
+                    time.sleep(0.01)
+            current_time = datetime.now().strftime("%H:%M:%S")
+            first_tweet_num = if_has_pinned_tweet(driver)
+            last_tweet = getTweetByNum(driver, first_tweet_num)
+            print(f"Current Time ({counter})=, {str(current_time)}: {last_tweet}")
+            counter += 1
+            if LAST_TWEET == '':
+                LAST_TWEET = last_tweet
+            elif LAST_TWEET != last_tweet and last_tweet != 'retweeted':
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print("Current Time =", current_time)
+                main_func(last_tweet)
+                send_message_to_bot("TWITTERPARSE: " + last_tweet)
+                new_tweet = last_tweet
+                LAST_TWEET = new_tweet
 
-        driver.refresh()
+            driver.refresh()
+    except:
+        send_message_to_bot("Stop parser")
+        print('CLOSE DRIVER')
+        driver.stop_client()
+        driver.close()
+        driver.quit()
+        driverStart(name)
+
+        
 driverStart(base_url)
