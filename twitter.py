@@ -87,14 +87,13 @@ def check_if_page_is_loaded(driver):
 def createDriver():
     print("Start Creating Driver")
     options = webdriver.ChromeOptions()
-    # options.add_argument('--headless')
+    options.add_argument('headless')
     options.add_argument('--incognito')
     options.add_argument('--disable-infobars')
-    # options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('--remote-debugging-port=9222')
-    # driver = webdriver.Chrome(options=options, executable_path='/Users/vladimirkogan/Downloads/chromedriver91') # LOCAL
-    driver = webdriver.Chrome(options=options, executable_path='drivers/driver241/chromedriver') # DIGITAL OCEAN DROPLET
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--remote-debugging-port=9222')
+    driver = webdriver.Chrome(options=options, executable_path='drivers/driver241/chromedriver')
     return driver
 
 
